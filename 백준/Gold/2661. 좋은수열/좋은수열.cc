@@ -1,57 +1,51 @@
+#include <algorithm>
+#include <cstring>
 #include <iostream>
-#include <stdlib.h>
-#include <string.h>
-#include <string>
+#include <vector>
+
 using namespace std;
-int n;
-string str;
-bool is_solution(string s, int depth)
-{
-	if (depth == 0) return true;
-	string suffix;
-	int len = s.length();
-	for (int i = len - 1; i >=0 ; i--)
-	{
-		suffix = s[i] + suffix;
-		string tmp;
-		for (int j = len - 1 - suffix.length(); j >= 0; j--)
-		{
-			tmp = s[j] + tmp;
-			if (suffix.compare(tmp) == 0)
-			{
-				return false;
-			}
-		}
-	}
-	return true;
+
+#define _FR(...) // freopen(__VA_ARGS__)
+#define fi first
+#define se second
+#define pb push_back
+#define ppb pop_back
+
+int N;
+string result;
+
+bool check(int len) {
+  string suffix;
+  for (int i = len - 1; i >= 0; i--) {
+    suffix.pb(result[i]);
+    string str;
+    for (int j = i - 1; j >= 0; j--) {
+      str.pb(result[j]);
+      if (suffix.compare(str) == 0) return false;
+    }
+  }
+  return true;
 }
-bool dfs(int len)
-{
-	if (len == n)
-	{
-		cout << str << "\n";
-		return true;
-	}
-	bool ret = false;
-	for (int num = 1; num <= 3; num++)
-	{
-		str += to_string(num);
-		if (is_solution(str, len))
-		{
-			ret = dfs(len + 1);
-		}
-		str.pop_back();
-		if (ret) return ret;
-	}
-	return ret;
+
+bool flag;
+void dfs(int len) {
+  if (len == N) {
+    printf("%s\n", result.c_str());
+    flag = true;
+    return;
+  }
+  for (int i = 1; i <= 3; i++) {
+    result.pb((i + '0'));
+    if (check(len + 1) && !flag) dfs(len + 1);
+
+    result.ppb();
+  }
 }
-int main(void)
-{
-	int tc = 1;
-	while (tc--)
-	{
-		scanf("%d", &n);
-		dfs(0);
-	}
-	return 0;
+
+int main(void) {
+  _FR("sample_input.txt", "r", stdin);
+  scanf("%d", &N);
+  flag = false;
+  dfs(0);
+  return 0;
 }
