@@ -78,33 +78,35 @@ int mystrcmp(char a[], char b[]) {
 }
 
 int main(void) {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
   _FR("sample_input.txt", "r", stdin);
-  scanf("%d", &N);
+  cin >> N;
   int a[2];
 
   for (int i = 0; i < N; i++) {
-    scanf("%d %d", &a[0], &a[1]);
+    cin >> a[0] >> a[1];
     addProblem(a[0], a[1]);
   }
 
-  scanf("%d", &M);
+  cin >> M;
 
   string type;
   string cmd[3] = {"add", "solved", "recommend"};
   for (int i = 0; i < M; i++) {
     cin >> type;
     if (type.compare(cmd[0]) == 0) {
-      scanf("%d %d", &a[0], &a[1]);
+      cin >> a[0] >> a[1];
       addProblem(a[0], a[1]);
     } else if (type.compare(cmd[1]) == 0) {
-      scanf("%d", &a[0]);
+      cin >> a[0];
       sovleProblem(a[0]);
     } else {
-      scanf("%d", &a[0]);
+      cin >> a[0];
       if (a[0] == 1) {
-        printf("%d\n", (*pbList.begin())->mId);
+        cout << (*pbList.begin())->mId << "\n";
       } else {
-        printf("%d\n", (*prev(pbList.end()))->mId);
+        cout << (*prev(pbList.end()))->mId << "\n";
       }
     }
   }
