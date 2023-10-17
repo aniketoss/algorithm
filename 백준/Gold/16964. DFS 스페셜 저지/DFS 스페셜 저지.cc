@@ -1,11 +1,10 @@
 #include <algorithm>
 #include <iostream>
 #include <set>
-#include <unordered_map>
 #include <vector>
 using namespace std;
 
-#define _FR(...)  // freopen(__VA_ARGS__)
+#define _FR(...) // freopen(__VA_ARGS__)
 
 #define fi first
 #define se second
@@ -19,11 +18,14 @@ int cnt;
 bool flag;
 vector<bool> visit(MAXN);
 vector<int> ord(MAXN);
-unordered_map<int, set<int>> tree;
+set<int> tree[MAXN];
 void init() {
   ::cnt = 0;
   visit.clear();
   flag = false;
+  for (int i = 0; i < N; i++) {
+    tree[i].clear();
+  }
   for (int i = 0; i < N - 1; i++) {
     int u, v;
     scanf("%d %d", &u, &v);
@@ -37,7 +39,7 @@ void init() {
   }
 }
 
-void dfs(int x, int depth) {
+void dfs(int x) {
   if (visit[x]) {
     return;
   }
@@ -45,7 +47,7 @@ void dfs(int x, int depth) {
   cnt++;
   for (int i = 0; i < tree[x].size(); i++) {
     if (!visit[ord[cnt]] && tree[x].find(ord[cnt]) != tree[x].end()) {
-      dfs(ord[cnt], depth + 1);
+      dfs(ord[cnt]);
     }
   }
 }
@@ -54,7 +56,7 @@ int main(void) {
   _FR("sample_input.txt", "r", stdin);
   scanf("%d", &N);
   init();
-  dfs(1, 0);
+  dfs(1);
   cnt < N ? printf("%d\n", 0) : printf("%d\n", 1);
   return 0;
 }
