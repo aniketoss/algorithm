@@ -52,28 +52,3 @@ int main(void) {
   printf("%d\n", cnt);
   return 0;
 }
-
-/*
-tiral and error:
-
-문제의 조건 "모두 짝수/모두 홀수 방향 파이어 볼이 합쳐지면.." => 홀수+홀수 =짝수, 짝수+짝수= 짝수, 홀수+짝수 = 짝수 임을 이용하여 홀수+홀수+홀수+홀수 = 짝수,
-
-짝수+짝수+짝수+짝수 = 짝수이므로 방향값을 다더하고 %2 하면 쉽게 처리가능해 보였지만.
-
-홀+짝+홀+짝 = 짝수 라는 반례 존재.
-
-void div() {
-  for (int i = 1; i <= N; i++) {
-    for (int j = 1; j <= N; j++) {
-        ......
-        int dir = 0;
-        for (auto idx : grid[i][j]) {
-          mass += fbNodes[idx].mMas;
-          vt += fbNodes[idx].mVt;
-          dir += fbNodes[idx].mDir;
-          fbNodes[idx].del = true; // deleted
-        }
-        // div to 4
-        ......
-}
-*/
