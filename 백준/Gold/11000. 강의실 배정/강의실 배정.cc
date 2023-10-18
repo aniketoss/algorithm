@@ -1,3 +1,26 @@
+/*
+
+Correctness? // To Do
+
+Trial and Error)
+
+Activity selection 문제와 마찬가지로 처음 finish time 기준으로 정렬 후 강의실 배정.
+
+하지만 이 문제는 Start time 기준으로 정렬 후. finish time기준으로 강의실을 할당해야함.
+
+간단하게 finish time 기준으로 강의실을 배정하면 다음과 같은 케이스의 반례가 존재함.
+
+(9, 11), (2,10), (3,9)
+
+finish time 기준 : (3,9), (2,10), (9,11),
+
+필요한 강의실 갯수 => 1강의실 {7,8} 2강의실 {3,9}, 3강의실 {2,10} 총 3개
+
+하지만 이 경우 필요한 최소 강의실은 1강의실 {2,10} 2 강의실 {3,9} {9,11} 총 2개
+
+즉 finish time은 최적해를 보장해주지 않는다.
+*/
+
 #include <algorithm>
 #include <iostream>
 #include <set>
